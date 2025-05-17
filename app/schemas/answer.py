@@ -1,3 +1,4 @@
+from uuid import UUID
 from pydantic import BaseModel
 
 class AnswerCreate(BaseModel):
@@ -5,7 +6,7 @@ class AnswerCreate(BaseModel):
   selected: str
 
 class AnswerOut(BaseModel):
-  id: int
+  id: UUID
   attempt_id: int
   question_id: int
   selected: str

@@ -1,3 +1,4 @@
+from uuid import UUID
 from datetime import datetime
 from pydantic import BaseModel, EmailStr
 
@@ -8,8 +9,8 @@ class UserBase(BaseModel):
 class UserCreate(UserBase):
   password: str
 
-class UserOut(UserBase):
-  id: int
+class UserResponse(UserBase):
+  id: UUID
   created_at: datetime
 
   class Config:

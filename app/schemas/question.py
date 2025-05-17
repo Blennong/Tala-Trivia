@@ -1,3 +1,4 @@
+from uuid import UUID
 from datetime import datetime
 from pydantic import BaseModel
 from typing import List
@@ -13,7 +14,7 @@ class QuestionCreate(QuestionBase):
   pass
 
 class QuestionOut(QuestionBase):
-  id: int
+  id: UUID
   created_at: datetime
 
   class Config:

@@ -1,3 +1,4 @@
+from uuid import UUID
 from datetime import datetime
 from pydantic import BaseModel
 from typing import List, Optional
@@ -10,7 +11,7 @@ class TriviaCreate(TriviaBase):
   question_ids: List[int]
 
 class TriviaOut(TriviaBase):
-  id: int
+  id: UUID
   created_by_id: int
   created_at: datetime
 
