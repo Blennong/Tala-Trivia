@@ -20,7 +20,7 @@ Puedes revisar las librerías en el archivo requirementss.txt
 
 ```bash
 git clone https://github.com/tu_usuario/tala-trivia-api.git
-cd tala-trivia-api
+cd tala-trivia-api```
 
 2. Crea un archivo .env a partir del archivo de ejemplo (.env.example)
 
