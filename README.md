@@ -2,7 +2,13 @@
 
 API para un juego de Trivia construida con FastAPI y PostgreSQL.
 
-## Tecnologías usadas en requirementss.txt
+## Tecnologías usadas 
+
+Stack:
+  -FastAPI (Python)
+  -PostgreSQL
+  
+Puedes revisar las librerías en el archivo requirementss.txt
 
 ## Requisitos
 
