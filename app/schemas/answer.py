@@ -1,16 +1,10 @@
 from uuid import UUID
 from pydantic import BaseModel
+from typing import List
 
 class AnswerCreate(BaseModel):
-  question_id: int
-  selected: str
+    question_id: UUID
+    selected: str
 
-class AnswerOut(BaseModel):
-  id: UUID
-  attempt_id: int
-  question_id: int
-  selected: str
-  is_correct: bool
-
-  class Config:
-    orm_mode = True
+class AttemptCreate(BaseModel):
+    answers: List[AnswerCreate]

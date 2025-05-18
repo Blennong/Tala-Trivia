@@ -17,7 +17,6 @@ class User(Base):
     trivias = relationship("Trivia", back_populates="creator")
     attempts = relationship("Attempt", back_populates="user")
 
-
 class Question(Base):
     __tablename__ = "questions"
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
@@ -29,7 +28,7 @@ class Question(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
 
     answers = relationship("Answer", back_populates="question")
-
+    trivia_questions = relationship("TriviaQuestion", back_populates="question", cascade="all, delete")
 
 class Trivia(Base):
     __tablename__ = "trivias"
@@ -41,7 +40,7 @@ class Trivia(Base):
 
     creator = relationship("User", back_populates="trivias")
     attempts = relationship("Attempt", back_populates="trivia")
-
+    trivia_questions = relationship("TriviaQuestion", back_populates="trivia", cascade="all, delete")
 
 class Attempt(Base):
     __tablename__ = "attempts"
@@ -55,7 +54,6 @@ class Attempt(Base):
     trivia = relationship("Trivia", back_populates="attempts")
     answers = relationship("Answer", back_populates="attempt")
 
-
 class Answer(Base):
     __tablename__ = "answers"
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
@@ -66,3 +64,12 @@ class Answer(Base):
 
     attempt = relationship("Attempt", back_populates="answers")
     question = relationship("Question", back_populates="answers")
+
+class TriviaQuestion(Base):
+    __tablename__ = "trivia_questions"
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    trivia_id = Column(UUID(as_uuid=True), ForeignKey("trivias.id"), nullable=False)
+    question_id = Column(UUID(as_uuid=True), ForeignKey("questions.id"), nullable=False)
+
+    trivia = relationship("Trivia", back_populates="trivia_questions")
+    question = relationship("Question", back_populates="trivia_questions")
