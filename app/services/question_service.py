@@ -3,6 +3,7 @@ from uuid import UUID
 from app.models.models import TriviaQuestion, Question
 from app.schemas.question import QuestionCreate, QuestionUpdate
 
+#TO-DO: Agregar validaciones
 def create_question(question_data: QuestionCreate, db: Session) -> Question:
     new_question = Question(
         text=question_data.text,

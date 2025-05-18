@@ -5,6 +5,7 @@ from jose import JWTError, jwt
 from typing import Optional
 from app.jwt_config import settings 
 
+#TO-DO: Agregar validaciones
 def hash_password(password: str) -> str:
 	return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 

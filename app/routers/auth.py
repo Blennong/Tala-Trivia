@@ -7,6 +7,7 @@ from app.services.auth_service import verify_password, create_access_token
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
 
+#TO-DO: logout y lista negra para dehabilitar JWT
 @router.post("/login", response_model=TokenResponse)
 def login_user(credentials: LoginRequest, db: Session = Depends(get_db)):
     user = db.query(models.User).filter(models.User.email == credentials.email).first()

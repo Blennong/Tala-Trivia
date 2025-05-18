@@ -20,7 +20,6 @@ class User(Base):
     assigned_trivias_association = relationship("TriviaUser", back_populates="user", cascade="all, delete")
     assigned_trivias = relationship("Trivia", secondary="trivia_users", back_populates="assigned_users")
 
-
 class Question(Base):
     __tablename__ = "questions"
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
@@ -48,7 +47,6 @@ class Trivia(Base):
 
     assigned_users_association = relationship("TriviaUser", back_populates="trivia", cascade="all, delete")
     assigned_users = relationship("User", secondary="trivia_users", back_populates="assigned_trivias")
-
 
 class Attempt(Base):
     __tablename__ = "attempts"
