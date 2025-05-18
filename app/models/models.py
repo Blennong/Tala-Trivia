@@ -16,6 +16,10 @@ class User(Base):
 
     trivias = relationship("Trivia", back_populates="creator")
     attempts = relationship("Attempt", back_populates="user")
+    
+    assigned_trivias_association = relationship("TriviaUser", back_populates="user", cascade="all, delete")
+    assigned_trivias = relationship("Trivia", secondary="trivia_users", back_populates="assigned_users")
+
 
 class Question(Base):
     __tablename__ = "questions"
@@ -41,6 +45,10 @@ class Trivia(Base):
     creator = relationship("User", back_populates="trivias")
     attempts = relationship("Attempt", back_populates="trivia")
     trivia_questions = relationship("TriviaQuestion", back_populates="trivia", cascade="all, delete")
+
+    assigned_users_association = relationship("TriviaUser", back_populates="trivia", cascade="all, delete")
+    assigned_users = relationship("User", secondary="trivia_users", back_populates="assigned_trivias")
+
 
 class Attempt(Base):
     __tablename__ = "attempts"
@@ -73,3 +81,12 @@ class TriviaQuestion(Base):
 
     trivia = relationship("Trivia", back_populates="trivia_questions")
     question = relationship("Question", back_populates="trivia_questions")
+
+class TriviaUser(Base):
+    __tablename__ = "trivia_users"
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    trivia_id = Column(UUID(as_uuid=True), ForeignKey("trivias.id"), primary_key=True)
+    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), primary_key=True)
+
+    trivia = relationship("Trivia", backref="trivia_users")
+    user = relationship("User", backref="trivia_users")

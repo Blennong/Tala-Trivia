@@ -58,3 +58,11 @@ def delete_trivia_endpoint(
     if not success:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Trivia no encontrada")
     return
+
+#Listar mis trivias
+@router.get("/mi-trivias", response_model=List[TriviaResponse])
+def get_assigned_trivias(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    return current_user.assigned_trivias

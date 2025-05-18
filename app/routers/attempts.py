@@ -25,7 +25,14 @@ def create_attempt_endpoint(
     # Crear intento
     attempt = Attempt(user_id=current_user.id, trivia_id=trivia_id)
     db.add(attempt)
-    db.flush()  # Para obtener attempt.id antes del commit
+    db.flush()
+
+    # Puntaje por dificultad
+    difficulty_score = {
+        "facil": 10,
+        "medio": 20,
+        "dificil": 30
+    }
 
     score = 0
 
@@ -35,7 +42,10 @@ def create_attempt_endpoint(
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Pregunta {ans.question_id} no encontrada")
 
         is_correct = ans.selected.strip().lower() == question.correct_answer.strip().lower()
-        score += 1 if is_correct else 0
+        
+        if is_correct:
+            puntaje = difficulty_score.get(question.difficulty.lower(), 0)
+            score += puntaje
 
         answer = Answer(
             attempt_id=attempt.id,

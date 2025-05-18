@@ -1,12 +1,12 @@
 from uuid import UUID
 from datetime import datetime
 from pydantic import BaseModel
-from typing import List
+from typing import List, Literal
 
 class QuestionBase(BaseModel):
     text: str
     category: str
-    difficulty: str
+    difficulty: Literal["facil", "medio", "dificil"]
     correct_answer: str
     options: List[str]
 

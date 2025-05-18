@@ -14,7 +14,7 @@ def login_user(credentials: LoginRequest, db: Session = Depends(get_db)):
     if not user or not verify_password(credentials.password, user.password_hash):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid email or password"
+            detail="Correo o password invalidos"
         )
 
     token = create_access_token({"sub": str(user.id)})

@@ -1,7 +1,7 @@
 from uuid import UUID
 from datetime import datetime
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 from app.schemas.question import QuestionResponse
 
 class TriviaBase(BaseModel):
@@ -9,7 +9,8 @@ class TriviaBase(BaseModel):
     description: Optional[str] = None
 
 class TriviaCreate(TriviaBase):
-    pass
+    question_ids: Optional[List[UUID]] = []
+    assigned_user_ids: List[UUID] = []
 
 class TriviaResponse(BaseModel):
     id: UUID
